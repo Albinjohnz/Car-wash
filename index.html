@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Wash Service Management</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        input, button { margin: 5px; }
+    </style>
+</head>
+<body>
+
+<h1>Car Wash Service Management</h1>
+
+<h2>Add New Service</h2>
+<input type="text" id="serviceName" placeholder="Service Name" required>
+<input type="text" id="serviceDescription" placeholder="Description" required>
+<input type="number" id="servicePrice" placeholder="Price" required>
+<button onclick="addService()">Add Service</button>
+
+<h2>Available Services</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="serviceTableBody"></tbody>
+</table>
+
+<script src="script.js"></script>
+
+</body>
+</html>
