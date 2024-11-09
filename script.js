@@ -20,28 +20,23 @@ function loadServices() {
     });
 }
 
+// Add a new service
+function addService() {
+    const name = document.getElementById('serviceName').value;
+    const description = document.getElementById('serviceDescription').value;
+    const price = document.getElementById('servicePrice').value;
 
-
-// Edit a service
-function editService(index) {
-    const services = JSON.parse(localStorage.getItem('services'));
-    const service = services[index];
-
-    document.getElementById('serviceName').value = service.name;
-    document.getElementById('serviceDescription').value = service.description;
-    document.getElementById('servicePrice').value = service.price;
-
-    // Remove service on edit
-    deleteService(index);
-}
-
-// Delete a service
-function deleteService(index) {
-    const services = JSON.parse(localStorage.getItem('services'));
-    services.splice(index, 1);
+    const services = JSON.parse(localStorage.getItem('services')) || [];
+    services.push({ name, description, price });
     localStorage.setItem('services', JSON.stringify(services));
+
+    document.getElementById('serviceName').value = '';
+    document.getElementById('serviceDescription').value = '';
+    document.getElementById('servicePrice').value = '';
+
     loadServices();
 }
 
-// Initial load
-loadServices();
+
+
+
