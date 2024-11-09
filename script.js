@@ -50,4 +50,13 @@ function editService(index) {
     deleteService(index);
 }
 
+// Delete a service
+function deleteService(index) {
+    const services = JSON.parse(localStorage.getItem('services'));
+    services.splice(index, 1);
+    localStorage.setItem('services', JSON.stringify(services));
+    loadServices();
+}
 
+// Initial load
+loadServices();
