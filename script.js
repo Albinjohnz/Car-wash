@@ -37,6 +37,17 @@ function addService() {
     loadServices();
 }
 
+// Edit a service
+function editService(index) {
+    const services = JSON.parse(localStorage.getItem('services'));
+    const service = services[index];
 
+    document.getElementById('serviceName').value = service.name;
+    document.getElementById('serviceDescription').value = service.description;
+    document.getElementById('servicePrice').value = service.price;
+
+    // Remove service on edit
+    deleteService(index);
+}
 
 
