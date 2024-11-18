@@ -20,20 +20,5 @@ function loadServices() {
     });
 }
 
-//add service back
-function addService() {
-    const name = document.getElementById('serviceName').value;
-    const description = document.getElementById('serviceDescription').value;
-    const price = document.getElementById('servicePrice').value;
 
-    const services = JSON.parse(localStorage.getItem('services')) || [];
-    services.push({ name, description, price });
-    localStorage.setItem('services', JSON.stringify(services));
-
-    document.getElementById('serviceName').value = '';
-    document.getElementById('serviceDescription').value = '';
-    document.getElementById('servicePrice').value = '';
-
-    loadServices();
-}
 
