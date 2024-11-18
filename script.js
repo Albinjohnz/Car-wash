@@ -1,4 +1,4 @@
-// Load services from local storage
+
 function loadServices() {
     const services = JSON.parse(localStorage.getItem('services')) || [];
     const tableBody = document.getElementById('serviceTableBody');
@@ -20,7 +20,7 @@ function loadServices() {
     });
 }
 
-// Add a new service
+//add service back
 function addService() {
     const name = document.getElementById('serviceName').value;
     const description = document.getElementById('serviceDescription').value;
@@ -37,26 +37,3 @@ function addService() {
     loadServices();
 }
 
-// Edit a service
-function editService(index) {
-    const services = JSON.parse(localStorage.getItem('services'));
-    const service = services[index];
-
-    document.getElementById('serviceName').value = service.name;
-    document.getElementById('serviceDescription').value = service.description;
-    document.getElementById('servicePrice').value = service.price;
-
-    // Remove service on edit
-    deleteService(index);
-}
-
-// Delete a service
-function deleteService(index) {
-    const services = JSON.parse(localStorage.getItem('services'));
-    services.splice(index, 1);
-    localStorage.setItem('services', JSON.stringify(services));
-    loadServices();
-}
-
-// Initial load
-loadServices();
