@@ -1,22 +1,20 @@
 
-function loadServices() {
-    const services = JSON.parse(localStorage.getItem('services')) || [];
-    const tableBody = document.getElementById('serviceTableBody');
-    tableBody.innerHTML = '';
+const API_URL = 'http://localhost:3000/services';
 
-    services.forEach((service, index) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${index + 1}</td>
-            <td>${service.name}</td>
-            <td>${service.description}</td>
-            <td>${service.price}</td>
-            <td>
-                <button onclick="editService(${index})">Edit</button>
-                <button onclick="deleteService(${index})">Delete</button>
-            </td>
+async function fetchServices() {
+    const response = await fetch(API_URL);
+    const services = await response.json();
+    const serviceList = document.getElementById('service-list');
+    serviceList.innerHTML = ''; 
+
+    services.forEach(service => {
+        const serviceItem = document.createElement('li');
+        serviceItem.innerHTML = `
+            ${service.name} - ${service.description} - $${service.price}
+            <button onclick="editService(${service.id})">Edit</button>
+            <button onclick="deleteService(${service.id})">Delete</button>
         `;
-        tableBody.appendChild(row);
+        serviceList.appendChild(serviceItem);
     });
 }
 
