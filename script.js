@@ -18,5 +18,23 @@ async function fetchServices() {
     });
 }
 
+async function addService() {
+    const serviceName = document.getElementById('serviceName').value;
+    const serviceDescription = document.getElementById('serviceDescription').value;
+    const servicePrice = document.getElementById('servicePrice').value;
 
+    if (serviceName && serviceDescription && servicePrice) {
+        await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: serviceName, description: serviceDescription, price: servicePrice })
+        });
+        fetchServices(); 
+        document.getElementById('serviceName').value = '';
+        document.getElementById('serviceDescription').value = '';
+        document.getElementById('servicePrice').value = '';
+    } else {
+        alert("All fields are required!");
+    }
+}
 
