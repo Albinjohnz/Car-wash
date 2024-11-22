@@ -37,4 +37,4 @@ async function addService() {
         alert("All fields are required!");
     }
 }
-
+document.addEventListener('DOMContentLoaded', fetchServices);
