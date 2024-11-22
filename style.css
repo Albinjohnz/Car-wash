@@ -1,28 +1,121 @@
+/* Global Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Basic Body Styling */
 body {
     font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 20px;
 }
 
+/* Header Styling */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #333;
+}
+
+h2 {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+/* Form Styling */
+input[type="text"], input[type="number"] {
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #333;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Table Styling */
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    background-color: #fff;
 }
+
 th, td {
-    border: 1px solid #ccc;
-    padding: 8px;
+    border: 1px solid #ddd;
+    padding: 12px;
     text-align: left;
+    font-size: 1rem;
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: #f4f4f4;
+    color: #333;
 }
 
-input, button {
-    margin: 5px;
+td {
+    color: #555;
+}
+
+td button {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    margin-right: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: none;
+}
+
+td button:hover {
+    opacity: 0.8;
+}
+
+button.delete {
+    background-color: #f44336;
+    color: white;
+}
+
+button.delete:hover {
+    background-color: #e53935;
+}
+
+button.edit {
+    background-color: #ffa500;
+    color: white;
+}
+
+button.edit:hover {
+    background-color: #ff9800;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    input[type="text"], input[type="number"], button {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
 }
