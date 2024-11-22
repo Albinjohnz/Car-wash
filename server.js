@@ -15,7 +15,18 @@ const db = mysql.createPool({
     password: 'albinjohn@321', 
     database: 'car'   
 });
+app.post('/services', (req, res) => {
+    const { name, description, price } = req.body;
 
+    const sql = 'INSERT INTO services (name, description, price) VALUES (?, ?, ?)';
+    db.query(sql, [name, description, price], (err, result) => {
+        if (err) {
+            res.status(500).send({ message: 'Error adding service' });
+        } else {
+            res.send({ message: 'Service added successfully' });
+        }
+    });
+});
 
 db.getConnection((err, connection) => {
     if (err) {
