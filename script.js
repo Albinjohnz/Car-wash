@@ -37,4 +37,12 @@ async function addService() {
         alert("All fields are required!");
     }
 }
+async function deleteService(serviceId) {
+    if (confirm('Are you sure you want to delete this service?')) {
+        await fetch(`${API_URL}/${serviceId}`, {
+            method: 'DELETE'
+        });
+        fetchServices(); 
+    }
+}
 document.addEventListener('DOMContentLoaded', fetchServices);
