@@ -27,7 +27,17 @@ app.post('/services', (req, res) => {
         }
     });
 });
-c
+app.delete('/services/:id', (req, res) => {
+    const { id } = req.params;
+    const sql = 'DELETE FROM services WHERE id = ?';
+    db.query(sql, [id], (err, result) => {
+        if (err) {
+            res.status(500).send({ message: 'Error deleting service' });
+        } else {
+            res.send({ message: 'Service deleted successfully' });
+        }
+    });
+});
 db.getConnection((err, connection) => {
     if (err) {
         console.error('Database connection failed:', err.stack);
