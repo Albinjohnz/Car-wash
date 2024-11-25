@@ -27,7 +27,7 @@ app.post('/services', (req, res) => {
         }
     });
 });
-
+c
 db.getConnection((err, connection) => {
     if (err) {
         console.error('Database connection failed:', err.stack);
