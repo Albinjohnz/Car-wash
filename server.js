@@ -29,13 +29,32 @@ app.post('/services', (req, res) => {
 });
 app.delete('/services/:id', (req, res) => {
     const { id } = req.params;
-    const sql = 'DELETE FROM services WHERE id = ?';
-    db.query(sql, [id], (err, result) => {
+
+    const deleteSql = 'DELETE FROM services WHERE id = ?';
+    db.query(deleteSql, [id], (err, result) => {
         if (err) {
-            res.status(500).send({ message: 'Error deleting service' });
-        } else {
-            res.send({ message: 'Service deleted successfully' });
+            return res.status(500).send({ message: 'Error deleting service' });
         }
+
+        const reorderSql = `
+            SET @count = 0;
+            UPDATE services SET id = (@count := @count + 1) ORDER BY id;
+        `;
+        db.query(reorderSql, (err, result) => {
+            if (err) {
+                console.error('Error reordering IDs:', err);
+                return res.status(500).send({ message: 'Error reordering IDs' });
+            }
+            const resetAutoIncrementSql = 'ALTER TABLE services AUTO_INCREMENT = 1;';
+            db.query(resetAutoIncrementSql, (err, result) => {
+                if (err) {
+                    console.error('Error resetting AUTO_INCREMENT:', err);
+                    return res.status(500).send({ message: 'Error resetting AUTO_INCREMENT' });
+                }
+
+                res.send({ message: 'Service deleted and IDs reorganized successfully' });
+            });
+        });
     });
 });
 db.getConnection((err, connection) => {
