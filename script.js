@@ -10,7 +10,7 @@ async function fetchServices() {
     services.forEach(service => {
         const serviceItem = document.createElement('li');
         serviceItem.innerHTML = `
-            ${service.name} - ${service.description} - $${service.price}
+        ${service.id} - ${service.name} - ${service.description} - $${service.price}
             <button onclick="editService(${service.id})">Edit</button>
             <button onclick="deleteService(${service.id})">Delete</button>
         `;
