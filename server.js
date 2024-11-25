@@ -36,15 +36,22 @@ app.delete('/services/:id', (req, res) => {
             return res.status(500).send({ message: 'Error deleting service' });
         }
 
-        const reorderSql = `
-            SET @count = 0;
-            UPDATE services SET id = (@count := @count + 1) ORDER BY id;
-        `;
-        db.query(reorderSql, (err, result) => {
+        const getServicesSql = 'SELECT * FROM services ORDER BY id';
+        db.query(getServicesSql, (err, services) => {
             if (err) {
-                console.error('Error reordering IDs:', err);
-                return res.status(500).send({ message: 'Error reordering IDs' });
+                console.error('Error fetching services:', err);
+                return res.status(500).send({ message: 'Error fetching services' });
             }
+
+            services.forEach((service, index) => {
+                const updateSql = 'UPDATE services SET id = ? WHERE id = ?';
+                db.query(updateSql, [index + 1, service.id], (err, result) => {
+                    if (err) {
+                        console.error('Error updating service ID:', err);
+                    }
+                });
+            });
+
             const resetAutoIncrementSql = 'ALTER TABLE services AUTO_INCREMENT = 1;';
             db.query(resetAutoIncrementSql, (err, result) => {
                 if (err) {
