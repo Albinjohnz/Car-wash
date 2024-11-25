@@ -27,40 +27,44 @@ app.post('/services', (req, res) => {
         }
     });
 });
-app.delete('/services/:id', (req, res) => {
-    const { id } = req.params;
 
-    const deleteSql = 'DELETE FROM services WHERE id = ?';
-    db.query(deleteSql, [id], (err, result) => {
+const { id } = req.params;
+
+const deleteSql = 'DELETE FROM services WHERE id = ?';
+db.query(deleteSql, [id], (err, result) => {
+    if (err) {
+        return res.status(500).send({ message: 'Error deleting service' });
+    }
+
+    const getServicesSql = 'SELECT * FROM services ORDER BY id';
+    db.query(getServicesSql, (err, services) => {
         if (err) {
-            return res.status(500).send({ message: 'Error deleting service' });
+            console.error('Error fetching services:', err);
+            return res.status(500).send({ message: 'Error fetching services' });
         }
 
-        const getServicesSql = 'SELECT * FROM services ORDER BY id';
-        db.query(getServicesSql, (err, services) => {
-            if (err) {
-                console.error('Error fetching services:', err);
-                return res.status(500).send({ message: 'Error fetching services' });
-            }
-
-            services.forEach((service, index) => {
+        let updates = 0;
+        services.forEach((service, index) => {
+            const newId = index + 1;
+            if (service.id !== newId) {
                 const updateSql = 'UPDATE services SET id = ? WHERE id = ?';
-                db.query(updateSql, [index + 1, service.id], (err, result) => {
+                db.query(updateSql, [newId, service.id], (err, result) => {
                     if (err) {
                         console.error('Error updating service ID:', err);
+                    } else {
+                        updates++;
                     }
                 });
-            });
+            }
+        });
+        const resetAutoIncrementSql = 'ALTER TABLE services AUTO_INCREMENT = 1;';
+        db.query(resetAutoIncrementSql, (err, result) => {
+            if (err) {
+                console.error('Error resetting AUTO_INCREMENT:', err);
+                return res.status(500).send({ message: 'Error resetting AUTO_INCREMENT' });
+            }
 
-            const resetAutoIncrementSql = 'ALTER TABLE services AUTO_INCREMENT = 1;';
-            db.query(resetAutoIncrementSql, (err, result) => {
-                if (err) {
-                    console.error('Error resetting AUTO_INCREMENT:', err);
-                    return res.status(500).send({ message: 'Error resetting AUTO_INCREMENT' });
-                }
-
-                res.send({ message: 'Service deleted and IDs reorganized successfully' });
-            });
+            res.send({ message: `${updates} service(s) deleted and IDs reorganized successfully` });
         });
     });
 });
