@@ -108,4 +108,31 @@ describe('Service API Endpoints', () => {
         expect(response.body).toEqual({ message: 'Error adding service' });
     });
 
-    
+    // Test case for GET /services - Retrieve all services
+    test('GET /services - Retrieve all services', async () => {
+        const mockServices = [
+            { id: 1, name: 'Oil Change', description: 'Change the engine oil', price: 29.99 },
+            { id: 2, name: 'Tire Rotation', description: 'Rotate the tires', price: 49.99 }
+        ];
+
+        // Mock database query to return services
+        mockDb.query.mockImplementation((sql, callback) => {
+            expect(sql).toBe('SELECT * FROM services');
+            callback(null, mockServices);
+        });
+
+        const response = await request(app)
+            .get('/services'); 
+
+        // Assertions
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual(mockServices);
+
+        expect(mockDb.query).toHaveBeenCalledTimes(1);
+    });
+});
+
+// Clear mocks before each test
+beforeEach(() => {
+    jest.clearAllMocks();  
+});
