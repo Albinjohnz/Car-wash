@@ -68,6 +68,22 @@ db.query(deleteSql, [id], (err, result) => {
         });
     });
 });
+app.put('/services/:id', (req, res) => {
+    const { id } = req.params;
+    const { name, description, price } = req.body;
+  
+    const sql = 'UPDATE services SET name = ?, description = ?, price = ? WHERE id = ?';
+  
+    db.query(sql, [name, description, price, id], (err, result) => {
+      if (err) {
+        console.error('Error updating service:', err);
+        return res.status(500).json({ error: 'Failed to update service' });
+      }
+  
+      res.json({ message: 'Service updated successfully' });
+    });
+  });
+
 db.getConnection((err, connection) => {
     if (err) {
         console.error('Database connection failed:', err.stack);
