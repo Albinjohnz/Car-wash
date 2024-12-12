@@ -65,4 +65,25 @@ describe('Service API Endpoints', () => {
         expect(mockDb.query).toHaveBeenCalledTimes(1);
     });
 
+    // Test case for POST /services - Missing required fields
+    test('POST /services - Missing required fields', async () => {
+        jest.setTimeout(10000);  
+
+        const newService = { 
+            name: '', 
+            description: '', 
+            price: '' 
+        };
+
+        const response = await request(app)
+            .post('/services')
+            .send(newService);
+
+        // Assertions
+        expect(response.status).toBe(400);
+        expect(response.body).toEqual({ 
+            error: 'All fields (name, description, price) are required' 
+        });
+    });
+
     
