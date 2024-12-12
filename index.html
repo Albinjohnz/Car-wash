@@ -4,22 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Wash Service Management</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <h1>Car Wash Service Management</h1>
-    
-    
-    <h2>Add New Service</h2>
-    <input type="text" id="serviceName" placeholder="Service Name" required>
-    <input type="text" id="serviceDescription" placeholder="Description" required>
-    <input type="number" id="servicePrice" placeholder="Price" required>
-    <button onclick="addService()">Add Service</button>
+    <div class="main-container">
+        <nav>
+            <h1>Car Wash Service Management</h1>
+        </nav>
 
-    
-    <h2>Available Services</h2>
-    <ul id="service-list"></ul>
+        <div class="image-carousel">
+            <img src="./applying-foam-car_153608-2678.jpg" alt="Car Wash 1" class="carousel-img">
+            <img src="./beautiful-car-washing-service_23-2149212191.jpg" alt="Car Wash 2" class="carousel-img">
+            <img src="./beautiful-car-washing-service_23-2149212209.jpg" alt="Car Wash 3" class="carousel-img">
+            <img src="./man-cleaning-his-car-self-service_329181-11843.jpg" alt="Car Wash 3" class="carousel-img">
+            <img src="./man-washing-his-car-garage_1157-26048.jpg" alt="Car Wash 3" class="carousel-img">
+        </div>
 
-    <script src="script.js"></script>
+        <div class="container">
+            <h2>Add New Service</h2>
+            <input type="text" id="serviceName" placeholder="Service Name" required>
+            <input type="text" id="serviceDescription" placeholder="Description" required>
+            <input type="number" id="servicePrice" placeholder="Price" required>
+            <button onclick="addService()">Add Service</button>
+
+            <h2>Available Services</h2>
+            <ul id="service-list"></ul>
+            <div id="edit-form-container"></div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
 </body>
 </html>
