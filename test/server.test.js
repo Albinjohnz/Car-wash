@@ -86,4 +86,26 @@ describe('Service API Endpoints', () => {
         });
     });
 
+    // Test case for POST /services - Simulate database failure
+    test('POST /services - Database failure', async () => {
+        const newService = {
+            name: 'Oil Change',
+            description: 'Change the engine oil',
+            price: 29.99,
+        };
+
+        // Simulate database failure
+        mockDb.query.mockImplementation((sql, params, callback) => {
+            callback(new Error('Database error'));
+        });
+
+        const response = await request(app)
+            .post('/services')
+            .send(newService);
+
+        // Assertions
+        expect(response.status).toBe(500);
+        expect(response.body).toEqual({ message: 'Error adding service' });
+    });
+
     
