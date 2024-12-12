@@ -22,4 +22,8 @@ Issues Faced
 
 Unit Testing
 tested for post and get functions.
-created two scenarios for post and working.
+created testcases for post and working.
+Test Case:Database failure (simulating a database error)
+Mock the database query to simulate a failure
+
+-- Also did Integration testing 
