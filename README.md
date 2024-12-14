@@ -111,11 +111,12 @@ CRUD operations (Create, Read, Update, Delete) are fundamental operations for in
 ---
 
  #### References
-1. Node.js Documentation: [https://nodejs.org](https://nodejs.org)
-2. Express.js Documentation: [https://expressjs.com](https://expressjs.com)
-3. MySQL Documentation: [https://dev.mysql.com/doc/](https://dev.mysql.com/doc/)
-4. Jest Testing Framework: [https://jestjs.io](https://jestjs.io)
-5. Supertest Library: [https://github.com/visionmedia/supertest](https://github.com/visionmedia/supertest)
+1. W3Schools. (2024). HTML Forms. Available at: https://www.w3schools.com/html/html_forms.asp Ahmed,J.,2023. 
+2. CRUD REST API with Node.js, Express.js, and PostgressSQL. DEV Community.https://dev.to/justahmed99/crud-rest-api-with-nodejs-expressjs-and-postgresql-57b2 Chinedu Orie, 2024. 
+3. Jest and Supertest - DEV Community: https://dev.to/nedsoft/testing-nodejs-express-api-with-jest-and-supertest-1km6 
+4. CRUD Tutorial : https://youtu.be/HCDAXBsTpHg?si=BviiO1fa-Roltbcc
+5. MySQL Documentation: [https://dev.mysql.com/doc/](https://dev.mysql.com/doc/)
+6. Jest Testing Framework: [https://jestjs.io](https://jestjs.io)
 
 ---
 
